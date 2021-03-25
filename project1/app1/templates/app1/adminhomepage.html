@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand">Welkom Admin</a>
+      <a href="/adminorders/" class="nav-items" style="text-decoration: none;color: black;">all orders</a>
+      <!-- <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form> -->
+      <a class="btn btn-danger"href="/adminlogout/">logout</a>
+    </div>
+  </nav>
+  <form method="POST" action="/addfood/">
+    {% csrf_token %}
+    <div class="container" style="display: block;margin: auto;width: 500px;">
+      <input type="text" class="form-contol" name="food" style="width: 150px;margin: auto;" placeholder="name">
+      <input type="text" class="form-contol" name="price" style="width: 150px; margin: auto;" placeholder="price">
+
+      <input type="submit" value="add" name="" class="btn btn-success" style="display: inline;">
+
+    </div>
+  </form>
+  <div class="container" style="display: block; margin: auto; width: 60%;margin-top: 80px;">
+    <table style="width: 50%;">
+      <tr>
+        <th>Food Item</th>
+        <th>Price</th>
+        <th>Delete</th>
+      </tr>
+      {% for food in FoodItems %}
+      <tr>
+        <td>{{food.name}}</td>
+        <td>{{food.price}}</td>
+        <td><a href="/deletefood/{{food.id}}/" class="btn btn-danger">delete</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endblock %}

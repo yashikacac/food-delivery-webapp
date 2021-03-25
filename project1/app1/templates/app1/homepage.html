@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- {% load crispy_forms_tags %} -->
+{% block content %}
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand">Welkom </a>
+      <!-- <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form> -->
+      <a class="btn btn-danger"href="/userlogin/">login</a>
+    </div>
+  </nav>
+  {% for message in messages %}
+  <p style="text-align: center;">{{message}}</p>
+  {% endfor %}
+  <div class="container-fluid" id="fluid">
+    <div class="container" id="dialogue_box" >
+              <h2>Sign Up</h2>
+    <form method="POST" action="/signupuser/">
+        {% csrf_token %}
+        <!-- {{ form|crispy }} class="form-control"-->
+        <input id= "input" class="form-control"placeholder="username" type="text" name="username" style="margin-bottom: 30px;">
+        <input id= "input" class="form-control"type="password" name="password" placeholder="password" style="margin-bottom: 30px;">
+
+        <input id= "input"class="form-control"type="text" name="phoneno" placeholder="phone No." style="margin-bottom: 30px;">
+        <input class="btn btn-success" type="submit" name="" style="display: block;margin: auto;margin-top: 20px;">
+    </form>
+    </div>
+
+  </div>
+
+<style>
+  #dialogue_box{
+    width: 500px; height: 350px; position: absolute; background-color: rgba(228, 217, 217,0.8);top: 70px; right: 10px; padding: 40px;
+  }
+  #dialogue_box:hover{
+    background-color: rgba(228, 217, 217,1);
+    transition-delay: 0.3s;
+
+  }
+  #fluid{
+    background-image: url({% static 'app1/img/homepage.jpg'%});
+    background-size: cover; position: relative;
+    height: 521px;
+  }
+    body{
+      /* padding-top: 10%;
+      padding-left: 35%;
+      background-color: rgba(143, 136, 136,0.2); */
+      font-family: 'raleway',sans-serif;
+
+
+    }
+    #input{
+      background: transparent!important;
+          border:none!important;
+          /* border-bottom: 2px solid #eaecee!important; */
+
+          border-bottom: 2px solid #5a5b5c!important;
+          outline: none!important;
+          box-shadow: none!important;
+      border-radius: 0px!important;
+    }
+    h2{
+      padding-bottom: 10px;
+      text-align: center;
+      /* color: azure; */
+    }
+    /* #pihu{
+        background-color: rgb(207, 164, 22);
+    } */
+  
+  </style>
+  <!-- <div class="login"> 
+    <div class="container login-container">
+      <div class="row nav-bar">
+        
+        <div class="col-md-6" id="pihu">
+          <h2>Login</h2>
+          <form method="POST" action="">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="text" placeholder="username" name = "username">
+            <br><br><br>
+            <input type="password" name="password" placeholder="password">
+            <br><br>
+  
+             <input type="submit" name=""> 
+            <button type="submit">Login</button>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div> -->
+  
+  {% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block content %}
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand">Welkom {{username}}</a>
+      <a href="/userorders/" style="text-decoration: none; color: black;"class="nav-item">my orders</a>
+      <!-- <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form> -->
+      <a class="btn btn-danger"href='/userlogout/'>logout</a>
+    </div>
+  </nav>
+  {% for message in messages %}
+<p style="color: green; text-align: center;">{{message}}</p>
+{% endfor %}
+<form method="POST" action="/placeorder/">
+    {% csrf_token %}
+  <div class="container" style="display: block; margin: auto; width: 50%;margin-top: 80px;">
+      <table>
+          <tr>
+              <th>Food Items</th>
+              <th>Price</th>
+              <th>Quantity</th>
+          </tr>
+          {% for food in foodItems %}
+          <tr>
+              <th>{{food.name}}</th>
+              <th>{{food.price}}</th>
+              <td><input class="input"type="number" name="{{food.id}}" id="quantity" value="0" min="0"></td>
+          </tr>
+          {% endfor %}
+      </table>
+      <input class="input"type="text" placeholder="input address" name="address" id="address">
+    </div>
+    <input type="submit" id="placeOrder" class="btn btn-success" value="place order">
+
+</form>
+
+  <!-- <a href=""class="btn btn-outline-success" id="placeOrder">Place Order</a> -->
+  <!-- <input type="submit" id="placeOrder" class="btn btn-success" value="place order"> -->
+  <style>
+      table{
+          width: 100%;
+      }
+      #quantity{
+          width: 60px;
+      }
+      #placeOrder{
+          position: absolute;
+          margin-top: 100px;
+          /* float: right; */
+          right: 50%;
+      }
+      #address{
+          width: 400px;
+          margin-top: 100px;
+          /* right: 50%; */
+      }
+      
+  /* </style>
+  <style> */
+    body{
+      font-family: 'raleway',sans-serif;
+    }
+    .input{
+      background: transparent!important;
+          border:none!important;
+          border-bottom: 2px solid #2e2e30!important;
+          outline: none!important;
+          box-shadow: none!important;
+      border-radius: 0px!important;
+    }
+    h2{
+      padding-bottom: 10px;
+    }
+    /* #pihu{
+        background-color: rgb(207, 164, 22);
+    } */
+  
+  </style>
+  {% endblock %}

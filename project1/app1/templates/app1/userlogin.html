@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style>
+  body{
+    padding-top: 10%;
+    padding-left: 35%;
+    background-color: rgba(143, 136, 136,0.2);
+    font-family: 'raleway',sans-serif;
+  }
+  input{
+    background: transparent!important;
+		border:none!important;
+		border-bottom: 2px solid #15171c!important;
+		outline: none!important;
+		box-shadow: none!important;
+    border-radius: 0px!important;
+  }
+  h2{
+    padding-bottom: 10px;
+  }
+  /* #pihu{
+      background-color: rgb(207, 164, 22);
+  } */
+
+</style>
+<div class="login">
+  <div class="container login-container">
+    <div class="row nav-bar">
+      
+      <div class="col-md-6" id="pihu">
+        <h2>Login</h2>
+        <form method="POST" action="/userauthenticate/">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <input type="text" placeholder="username" name = "username">
+          <br><br><br>
+          <input type="password" name="password" placeholder="password">
+          <br><br>
+
+          <!-- <input type="submit" name=""> -->
+          <button type="submit">Login</button>
+        </form>
+        {% for message in messages %}
+        <p style="text-align: center; color: red;">{{message}}</p>
+        {% endfor %}
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}
